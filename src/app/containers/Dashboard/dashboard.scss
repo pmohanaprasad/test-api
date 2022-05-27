@@ -1,0 +1,32 @@
+body {
+  font-family: Mulish;
+  font-style: normal;
+}
+
+.title {
+  font-weight: 900;
+}
+
+.name {
+  font-weight: 800;
+}
+
+.details {
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.35);
+}
+
+.addButton {
+  width: auto;
+  border: none;
+  background-color: rgba(46, 210, 46, 0.836);
+}
+
+.addButton:hover {
+  background-color: green;
+}
+
+// .userPic {
+//   padding: 0.4em;
+//   border: 0.1em solid black;
+//   border-radius: 20%;
+// }
