@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "reactstrap";
 
-const InputField = ({ type, placeholder, className, error, ...rest }) => {
+const InputField = ({ type, placeholder, className, ...rest }) => {
   return (
     <>
       <Input
@@ -10,7 +10,7 @@ const InputField = ({ type, placeholder, className, error, ...rest }) => {
         className={className}
         {...rest}
       />
-      {error && <div className="warning">{error.message}</div>}
+      {/* {error && <div className="warning">{error.message}</div>} */}
     </>
   );
 };

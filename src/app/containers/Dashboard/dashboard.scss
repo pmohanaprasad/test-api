@@ -12,30 +12,37 @@ body {
 }
 
 .details {
-  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.35);
+  border-radius: 0.625em;
+  box-shadow: 0 0 3.125em rgba(0, 0, 0, 0.35);
 }
 
 .addButton {
   width: auto;
-  border: none;
-  background-color: rgba(46, 210, 46, 0.836);
+  display: block;
+  margin: 0 auto;
 }
 
-.addButton:hover {
-  background-color: green;
+.formContents {
+  padding: 0.125em 0.125em;
 }
 
-button {
-  padding: 20px;
-  border-radius: 5px;
+.formNames {
+  color: black;
+  font-weight: bold;
+  font-family: Mulish;
+  text-align: center;
+  padding: 0.75em 0.625em;
+  width: 100%;
+  margin: 0.5em 0;
 }
 
-.delete-btn {
-  margin-top: 10px;
-  background-color: red;
-  color: #fff;
-  padding: 15px 40px;
-  border-radius: 5px;
+.formFirst {
+  width: 100%;
+  color: black;
+  padding: 0.75em 1.25em;
+  margin: 0.5em 0;
   display: inline-block;
-  cursor: pointer;
+  border: 1px solid rgb(32, 30, 30);
+  border-radius: 4px;
+  box-sizing: border-box;
 }
