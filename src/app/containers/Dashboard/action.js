@@ -1,18 +1,12 @@
-export const FETCH_DETAILS = "FETCH_DETAILS";
-export const ADD_DETAILS = "ADD_DETAILS";
-export const DELETE_DETAILS = "DELETE_DETAILS";
+export const NAME = "NAME";
+export const EMAIL = "EMAIL";
 
 export const FETCH = (payload) => ({
-  type: FETCH_DETAILS,
+  type: NAME,
   payload,
 });
 
 export const ADD = (payload) => ({
-  type: ADD_DETAILS,
-  payload,
-});
-
-export const DELETE = (payload) => ({
-  type: DELETE_DETAILS,
+  type: EMAIL,
   payload,
 });

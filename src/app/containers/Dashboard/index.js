@@ -1,32 +1,40 @@
-import React, { useEffect, useState, useSelector, useDispatch } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
+import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { FETCH_DETAILS } from "./action";
-
 import "./dashboard.scss";
+
+const client = axios.create({
+  baseURL: "https://reqres.in/api/users",
+});
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [hasMore, sethasMore] = useState(true);
   const [page, setPage] = useState(2);
 
-  // const details = useSelector((state) => state);
-  // const dispatch = useDispatch();
+  useEffect(() => {
+    fetchDetails();
+  }, []);
 
   const fetchDetails = async () => {
-    const response = await fetch("https://reqres.in/api/users?page=1");
-    const json = await response.json();
-
-    setUsers(json.data);
-    return json.data;
-    // dispatch(FETCH_DETAILS(json.data));
+    try {
+      const response = await client.get("?page=1");
+      console.log(response.data.data);
+      setUsers(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const initialPage = async () => {
-    const response = await fetch("https://reqres.in/api/users?page=" + page);
-    const json = await response.json();
-    return json.data;
+    try {
+      let response = await client.get("?page=" + page);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const nextPage = async () => {
@@ -38,9 +46,18 @@ const Dashboard = () => {
     setPage(page + 1);
   };
 
-  useEffect(() => {
-    fetchDetails();
-  }, []);
+  const deleteData = async (id) => {
+    try {
+      await client.delete(`${id}`);
+      setUsers(
+        users.filter((user) => {
+          return user.id !== id;
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Container fluid>
@@ -64,11 +81,20 @@ const Dashboard = () => {
                       key={user.avatar}
                       src={user.avatar}
                       className="userPic"
+                      alt="user"
                     />
                     <div className="mx-3 px-2">
                       <div>{user.id}</div>
                       <div className="name">{user.first_name}</div>
                       <div>{user.email}</div>
+                      <div className="button">
+                        <div
+                          className="delete-btn"
+                          onClick={() => deleteData(user.id)}
+                        >
+                          Delete
+                        </div>
+                      </div>
                     </div>
                   </Col>
                 );
