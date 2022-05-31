@@ -3,6 +3,22 @@
 body {
   font-family: Mulish;
   font-style: normal;
+  background: linear-gradient(-45deg, #ffffff, #eeeeee, #dddddd, #cccccc);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 body::-webkit-scrollbar {
@@ -24,6 +40,7 @@ element {
 }
 
 .details {
+  background-color: white;
   border-radius: 0.625em;
   box-shadow: 0 0 3.125em rgba(0, 0, 0, 0.15);
 }
