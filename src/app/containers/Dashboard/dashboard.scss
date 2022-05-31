@@ -1,10 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&family=Pacifico&display=swap");
+
 body {
   font-family: Mulish;
   font-style: normal;
 }
 
+element {
+  overflow: hidden;
+}
+
 .title {
-  font-weight: 900;
+  font-family: "Open Sans", sans-serif;
+  font-family: "Pacifico", cursive;
+  // font-weight: 900;
 }
 
 .name {
@@ -13,7 +21,7 @@ body {
 
 .details {
   border-radius: 0.625em;
-  box-shadow: 0 0 3.125em rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 3.125em rgba(0, 0, 0, 0.15);
 }
 
 .addButton {
