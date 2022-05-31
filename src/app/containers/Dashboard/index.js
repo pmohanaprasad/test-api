@@ -188,7 +188,7 @@ const Dashboard = () => {
           hasMore={hasMore}
           style={{ overflow: "none" }}
         >
-          <Row className="mt-2 pt-2 p-3 justify-content-center">
+          <Row lg="4" xs="3" className="mt-2 pt-2 p-3 justify-content-center">
             {users.length &&
               users.map((user) => {
                 return (
