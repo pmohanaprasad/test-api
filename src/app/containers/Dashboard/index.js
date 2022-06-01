@@ -11,10 +11,12 @@ import {
   ModalFooter,
 } from "reactstrap";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import InputField from "../../components/InputField";
 import "./dashboard.scss";
+import { fetchData, getAllApi } from "../../redux/Api/ApiSlice";
 
 //FETCH
 const client = axios.create({
@@ -30,8 +32,11 @@ const Dashboard = () => {
   const [updateEmail, setUpdateEmail] = useState("");
   const [hasMore, sethasMore] = useState(true);
   const [page, setPage] = useState(2);
-
   const [open, setOpen] = useState(false);
+
+  const data = useSelector(getAllApi);
+
+  const dispatch = useDispatch();
 
   const hideModal = () => {
     setOpen(false);
@@ -39,6 +44,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchDetails();
+    // eslint-disable-next-line
   }, []);
 
   //GET
@@ -46,6 +52,8 @@ const Dashboard = () => {
     try {
       const response = await client.get("?page=1");
       setUsers(response.data.data);
+      dispatch(fetchData(response.data));
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +79,6 @@ const Dashboard = () => {
 
   //DELETE
   const deleteData = async (id) => {
-    console.log(id);
     try {
       await client.delete(`${id}`);
       setUsers(
