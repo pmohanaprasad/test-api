@@ -14,6 +14,8 @@ import client from "../../api";
 import { fetchData, getAllApi } from "../../redux/Api/ApiSlice";
 import InputField from "../InputField";
 
+import { toast } from "wc-toast";
+
 const UpdateData = (props) => {
   const data = useSelector(getAllApi);
 
@@ -42,6 +44,14 @@ const UpdateData = (props) => {
       setOpen(false);
       setUpdateName("");
       setUpdateEmail("");
+      // toast.info("User Updated");
+      toast("User Updated", {
+        icon: { type: "custom", content: "⬆️" },
+        theme: {
+          type: "custom",
+          style: { background: "white", color: "black" },
+        },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -59,6 +69,7 @@ const UpdateData = (props) => {
 
   return (
     <>
+      <wc-toast position="top-right" />
       <Button
         color="primary"
         className="mt-3 mx-2 w-auto"

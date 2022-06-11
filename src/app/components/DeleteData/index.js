@@ -5,6 +5,8 @@ import client from "../../api";
 import { useNavigate } from "react-router-dom";
 import { fetchData, getAllApi } from "../../redux/Api/ApiSlice";
 
+import { toast } from "wc-toast";
+
 const DeleteData = (props) => {
   const pagenotfound = useNavigate();
 
@@ -22,19 +24,23 @@ const DeleteData = (props) => {
           })
         )
       );
+      toast.error("User Deleted");
     } catch (error) {
       pagenotfound("/pagenotfound");
     }
   };
 
   return (
-    <Button
-      color="danger"
-      className="mt-3 mx-2 w-auto"
-      onClick={() => deleteData(props.text)}
-    >
-      Delete
-    </Button>
+    <>
+      <wc-toast position="top-right" />
+      <Button
+        color="danger"
+        className="mt-3 mx-2 w-auto"
+        onClick={() => deleteData(props.text)}
+      >
+        Delete
+      </Button>
+    </>
   );
 };
 

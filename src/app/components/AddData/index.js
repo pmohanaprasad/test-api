@@ -7,6 +7,8 @@ import client from "../../api";
 import { fetchData, getAllApi } from "../../redux/Api/ApiSlice";
 import InputField from "../InputField";
 
+import { toast } from "wc-toast";
+
 const AddData = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,6 +29,7 @@ const AddData = () => {
       dispatch(fetchData([response.data, ...data]));
       setName("");
       setEmail("");
+      toast.success("User Added");
     } catch (error) {
       pagenotfound("/pagenotfound");
     }
@@ -39,6 +42,7 @@ const AddData = () => {
 
   return (
     <div>
+      <wc-toast position="top-right" />
       <Form onSubmit={postSubmit}>
         <p className="text-center fw-bolder">ADD DATA</p>
         <hr />
