@@ -25,9 +25,14 @@ const UpdateData = (props) => {
   const [updateName, setUpdateName] = useState("");
   const [updateEmail, setUpdateEmail] = useState("");
   const [open, setOpen] = useState(false);
+  const [confirm, setConfirm] = useState(false);
 
   const hideModal = () => {
     setOpen(false);
+  };
+
+  const hideConfirmModal = () => {
+    setConfirm(false);
   };
 
   const updateData = async (id) => {
@@ -41,10 +46,10 @@ const UpdateData = (props) => {
           )
         )
       );
+      setConfirm(false);
       setOpen(false);
       setUpdateName("");
       setUpdateEmail("");
-      // toast.info("User Updated");
       toast("User Updated", {
         icon: { type: "custom", content: "⬆️" },
         theme: {
@@ -127,10 +132,46 @@ const UpdateData = (props) => {
               color="success"
               type="submit"
               className="addButton mt-2 w-auto"
-              onClick={() => updateData(updateUsers)}
+              onClick={() => setConfirm(true)}
             >
               Update
             </Button>
+            <Modal
+              returnFocusAfterClose
+              isOpen={confirm}
+              size="sm"
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+            >
+              <ModalHeader className="text-black justify-content-center">
+                CONFIRM UPDATE
+              </ModalHeader>
+              <ModalBody className="text-black">
+                <Form onSubmit={(e) => e.preventDefault()}>
+                  <Row className="formContents">
+                    <Col className="text-center">Want to Update the User?</Col>
+                  </Row>
+                </Form>
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="success"
+                  type="submit"
+                  className="addButton mt-2 w-auto"
+                  onClick={() => updateData(updateUsers)}
+                >
+                  Yes
+                </Button>
+                <Button
+                  color="danger"
+                  type="submit"
+                  className="addButton mt-2 w-auto"
+                  onClick={hideConfirmModal}
+                >
+                  No
+                </Button>
+              </ModalFooter>
+            </Modal>
           </Form>
         </ModalBody>
         <ModalFooter>

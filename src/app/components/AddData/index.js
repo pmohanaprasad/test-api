@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Form, Button } from "reactstrap";
+import {
+  Row,
+  Col,
+  Form,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
 
 import { useNavigate } from "react-router-dom";
 import client from "../../api";
@@ -19,6 +28,12 @@ const AddData = () => {
 
   const dispatch = useDispatch();
 
+  const [open, setOpen] = useState(false);
+
+  const hideModal = () => {
+    setOpen(false);
+  };
+
   //ADD
   const addData = async (name, email) => {
     try {
@@ -35,15 +50,15 @@ const AddData = () => {
     }
   };
 
-  const postSubmit = (e) => {
-    e.preventDefault();
+  const postSubmit = () => {
     addData(name, email);
+    setOpen(false);
   };
 
   return (
     <div>
       <wc-toast position="top-right" />
-      <Form onSubmit={postSubmit}>
+      <Form onSubmit={(e) => e.preventDefault()}>
         <p className="text-center fw-bolder">ADD DATA</p>
         <hr />
         <Row className="formContents">
@@ -76,9 +91,50 @@ const AddData = () => {
             />
           </Col>
         </Row>
-        <Button color="success" type="submit" className="addButton mt-2 w-auto">
+        <Button
+          color="success"
+          type="submit"
+          onClick={() => setOpen(true)}
+          className="addButton mt-2 w-auto"
+        >
           Add
         </Button>
+        <Modal
+          returnFocusAfterClose
+          isOpen={open}
+          size="sm"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <ModalHeader className="text-black justify-content-center">
+            CONFIRM ADD
+          </ModalHeader>
+          <ModalBody className="text-black">
+            <Form onSubmit={(e) => e.preventDefault()}>
+              <Row className="formContents">
+                <Col className="text-center">Want to Add the User?</Col>
+              </Row>
+            </Form>
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              color="success"
+              type="submit"
+              className="addButton mt-2 w-auto"
+              onClick={postSubmit}
+            >
+              Yes
+            </Button>
+            <Button
+              color="danger"
+              type="submit"
+              className="addButton mt-2 w-auto"
+              onClick={hideModal}
+            >
+              No
+            </Button>
+          </ModalFooter>
+        </Modal>
       </Form>
     </div>
   );
